@@ -1,10 +1,13 @@
 package Classaria.characters;
 
-public class Warrior extends Character {
+import Classaria.monsters.Enemy;
+
+public class Warrior extends Character implements LevelUp, BasicAttack {
     private int pATK;
     private int skillDMG;
 
     public Warrior() {
+        setClassName("Warrior");
         this.pATK = 5;
         this.skillDMG = 10;
         setHp(35);
@@ -13,12 +16,49 @@ public class Warrior extends Character {
         setLvl(1);
     }
 
-    public int getsugaTensho() {
+    @Override
+    public int getAtk() {
+        return pATK;
+    }
+
+    @Override
+    public void firstSkill(Enemy target) {
+        System.out.println("Player have slash the blade and yell GETSUGA TENSHO!");
+
+        if (target.getHp() > 0) {
+            target.setHp(target.getHp() - skillDMG);
+        }
+
+        if (target.getHp() < skillDMG) {
+            target.setHp(0);
+        }
+
+        System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
+    }
+
+    @Override
+    public int getFirstSkillDMG() {
         return skillDMG;
     }
 
-    public int basicAttack() {
-        return pATK;
+    public void basicAttack(Enemy target) {
+        System.out.println("Player rush forward and slash the enemy!");
+
+        if (target.getHp() > 0) {
+            target.setHp(target.getHp() - pATK);
+        }
+
+        if (target.getHp() < pATK) {
+            target.setHp(0);
+        }
+
+        System.out.println("Player deals " + pATK + " of Damage to the enemy!");
+    }
+
+    @Override
+    public void displaySkills() {
+        System.out.printf("1. Slash => -%d DMG%n", pATK);
+        System.out.printf("2. Getsuga Tensho => -%d DMG%n", getFirstSkillDMG());
     }
 
     public void levelUp() {
@@ -28,22 +68,5 @@ public class Warrior extends Character {
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
         setLvl(getLvl() + 1);
-    }
-
-    public int getpATK() {
-        return pATK;
-    }
-
-    public int getSkillDMG() {
-        return skillDMG;
-    }
-
-    public void getDescription() {
-        System.out.println("HP: " + getHp());
-        System.out.println("P.ATK: " + getpATK());
-        System.out.println("skillDMG: " + getSkillDMG());
-        System.out.println("Def: " + getDef());
-        System.out.println("Spd: " + getSpd());
-        System.out.println("Lvl: " + getLvl());
     }
 }

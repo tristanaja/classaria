@@ -1,11 +1,14 @@
 package Classaria.characters;
 
-public class Mage extends Character {
+import Classaria.monsters.Enemy;
+
+public class Mage extends Character implements LevelUp, BasicAttack {
     private int mATK;
     private int skillDMG;
     private int healAMT;
 
     public Mage() {
+        setClassName("Mage");
         this.mATK = 15;
         this.skillDMG = 20;
         this.healAMT = 5;
@@ -15,16 +18,59 @@ public class Mage extends Character {
         setLvl(1);
     }
 
-    public int disintegration() {
-        return skillDMG;
+    @Override
+    public int getAtk() {
+        return mATK;
+    }
+
+    @Override
+    public void firstSkill(Enemy target) {
+        System.out.println("Player chants and casted Disintegration!");
+
+        if (target.getHp() > 0) {
+            target.setHp(target.getHp() - skillDMG);
+        }
+
+        if (target.getHp() < skillDMG) {
+            target.setHp(0);
+        }
+
+        System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
     }
 
     public void heal() {
         setHp(getHp() + this.healAMT);
     }
 
-    public int basicAttack() {
-        return mATK;
+    @Override
+    public int getFirstSkillDMG() {
+        return skillDMG;
+    }
+
+    @Override
+    public int getSecondSkillDMG() {
+        return healAMT;
+    }
+
+    public void basicAttack(Enemy target) {
+        System.out.println("Player casted a Fire Ball to the enemy!");
+
+        if (target.getHp() > 0) {
+            target.setHp(target.getHp() - mATK);
+        }
+
+        if (target.getHp() < mATK) {
+            target.setHp(0);
+        }
+
+        System.out.println("Player deals " + mATK + " of Damage to the enemy!");
+    }
+
+    @Override
+    public void displaySkills() {
+        System.out.printf("1. Fire Ball => -%d DMG%n", mATK);
+        System.out.printf("2. Disintegration => -%d DMG%n", getFirstSkillDMG());
+        System.out.printf("3. Heal => +%d Heal%n", getSecondSkillDMG());
     }
 
     public void levelUp() {
@@ -35,22 +81,5 @@ public class Mage extends Character {
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
         setLvl(getLvl() + 1);
-    }
-
-    public int getmATK() {
-        return mATK;
-    }
-
-    public int getSkillDMG() {
-        return skillDMG;
-    }
-
-    public void getDescription() {
-        System.out.println("HP: " + getHp());
-        System.out.println("P.ATK: " + getmATK());
-        System.out.println("skillDMG: " + getSkillDMG());
-        System.out.println("Def: " + getDef());
-        System.out.println("Spd: " + getSpd());
-        System.out.println("Lvl: " + getLvl());
     }
 }

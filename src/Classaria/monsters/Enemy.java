@@ -6,9 +6,9 @@ public class Enemy {
     private int spd;
 
     public Enemy() {
-        setHp(50);
-        setAtk(10);
-        setSpd(20);
+        setHp(0);
+        setAtk(0);
+        setSpd(0);
     }
 
     public void setHp(int hp) {
