@@ -60,6 +60,10 @@ public class Mage extends Character implements LevelUp, BasicAttack {
         }
     }
 
+    public void flushInitialStats() {
+        setHp(initialHP);
+    }
+
     @Override
     public int getFirstSkillDMG() {
         return mATK;
@@ -92,6 +96,7 @@ public class Mage extends Character implements LevelUp, BasicAttack {
 
     @Override
     public void levelUp() {
+        flushInitialStats();
         this.mATK += 5;
         this.skillDMG += 10;
         this.healAMT += 5;

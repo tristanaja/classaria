@@ -5,6 +5,7 @@ import Classaria.monsters.Enemy;
 public class Warrior extends Character implements BasicAttack {
     private int pATK;
     private int skillDMG;
+    private int initialHP;
 
     public Warrior() {
         setClassName("Warrior");
@@ -14,6 +15,11 @@ public class Warrior extends Character implements BasicAttack {
         setDef(15);
         setSpd(5);
         setLvl(1);
+        setInitialHP(getHp());
+    }
+
+    public void setInitialHP(int initialHP) {
+        this.initialHP = initialHP;
     }
 
     @Override
@@ -43,6 +49,10 @@ public class Warrior extends Character implements BasicAttack {
         System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
     }
 
+    public void flushInitialStats() {
+        setHp(initialHP);
+    }
+
     @Override
     public int getFirstSkillDMG() {
         return skillDMG;
@@ -56,6 +66,7 @@ public class Warrior extends Character implements BasicAttack {
 
     @Override
     public void levelUp() {
+        flushInitialStats();
         this.pATK += 5;
         this.skillDMG += 10;
         setHp(getHp() + 5);

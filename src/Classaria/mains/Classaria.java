@@ -122,22 +122,34 @@ public class Classaria {
                         playerMove = input.nextInt();
 
                         if (player.getSpd() >= enemy.getSpd()) {
+                            System.out.println();
+                            System.out.println("=".repeat(50));
                             Character.chooseSkill(playerMove, player, enemy);
+                            System.out.println("=".repeat(50));
                             Enemy.monsterAttack(player, enemy);
+                            System.out.println("=".repeat(50));
                         }
 
                         if (player.getSpd() < enemy.getSpd()) {
+                            System.out.println();
+                            System.out.println("=".repeat(50));
                             enemy.basicAttack(player);
+                            System.out.println("=".repeat(50));
                             Character.chooseSkill(playerMove, player, enemy);
+                            System.out.println("=".repeat(50));
                         }
 
                         if (player.getHp() == 0) {
-                            System.out.println("\n" + "=".repeat(13));
-                            System.out.println("= You Lose! =");
-                            System.out.println("=".repeat(13));
-                            YNRound = "n";
                             break;
                         }
+                    }
+
+                    if (player.getHp() == 0) {
+                        System.out.println("\n" + "=".repeat(13));
+                        System.out.println("= You Lose! =");
+                        System.out.println("=".repeat(13));
+                        YNRound = "n";
+                        break;
                     }
 
                     if ((counter - 1) % 4 == 0) {

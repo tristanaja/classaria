@@ -5,6 +5,7 @@ import Classaria.monsters.Enemy;
 public class Assasin extends Character implements LevelUp, BasicAttack {
     private int pATK;
     private int skillDMG;
+    private int initialHP;
 
     public Assasin() {
         setClassName("Assasin");
@@ -14,6 +15,11 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
         setDef(10);
         setSpd(15);
         setLvl(1);
+        setInitialHP(getHp());
+    }
+
+    public void setInitialHP(int initialHP) {
+        this.initialHP = initialHP;
     }
 
     @Override
@@ -33,6 +39,10 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
         target.setHp(Math.max(0, target.getHp() - skillDMG));
 
         System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
+    }
+
+    public void flushInitialStats() {
+        setHp(initialHP);
     }
 
     @Override
@@ -56,6 +66,7 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
 
     @Override
     public void levelUp() {
+        flushInitialStats();
         this.pATK += 5;
         this.skillDMG += 15;
         setHp(getHp() + 5);
