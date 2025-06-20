@@ -1,25 +1,35 @@
 package Classaria.mains;
 
 import Classaria.characters.Character;
+import Classaria.monsters.Enemy;
 
+import java.util.Random;
 import java.util.Scanner;
 
 public class Classaria {
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
-        String YN;
+        int counter = 1;
+        String YNGame;
+        String YNClass;
+        String YNRound = "y";
         int chosenClass;
         Character player;
+        int playerMove;
+        Enemy enemy;
+        Random random = new Random();
+        int[] randomNormalIndexes = {1, 2};
+        int[] randomBossIndexes = {1};
 
         System.out.println("-+-+-+-+-+-+-");
         System.out.println("+ Classaria +");
         System.out.println("-+-+-+-+-+-+-\n");
 
         System.out.print("Start The Game? (y/n) ");
-        YN = input.nextLine();
+        YNGame = input.nextLine();
 
-        if (YN.equals("y")) {
-            while (YN.equals("y")) {
+        if (YNGame.equals("y")) {
+            while (YNGame.equals("y")) {
                 System.out.println("\nChoose your Class!");
                 System.out.println("1. Warrior");
                 System.out.println("2. Assasin");
@@ -48,11 +58,112 @@ public class Classaria {
                 System.out.println("\nSkills:");
                 player.displaySkills();
                 System.out.println("=".repeat(30));
-                System.out.println("Skill Damage and Player Stats will increase on each round completion!");
+                System.out.println("Skill Damage and Player Stats will increase on each round completion!\n");
                 System.out.print("Do you want this class? (y/n) ");
-                YN = input.nextLine();
+                input.nextLine();
+                YNClass = input.nextLine();
+
+                if (YNClass.equals("n")) {
+                    System.out.println("\n" + "=".repeat(38));
+                    System.out.println("= Okay! Select Different Class Next! =");
+                    System.out.println("=".repeat(38));
+                    continue;
+                } else if (!YNClass.equals("y")) {
+                    System.out.println("\n" + "=".repeat(30));
+                    System.out.println("= Invalid Input! Start Over! =");
+                    System.out.println("=".repeat(30));
+                    continue;
+                }
+
+                System.out.println("\n-+-+-+-+-+-+-");
+                System.out.println("+ Classaria +");
+                System.out.println("-+-+-+-+-+-+-\n");
+
+                System.out.printf("Welcome! Your Journey Starts now %s!%n", player.getClassName());
+                while (YNRound.equals("y")) {
+                    System.out.println("=".repeat(30));
+                    System.out.println("= Round " + counter + " =");
+                    if (counter > 9) {
+                        System.out.println("=".repeat(12));
+                    } else {
+                        System.out.println("=".repeat(11));
+                    }
+                    System.out.println("\n...\n");
+
+                    if (counter % 4 == 0) {
+                        int randomBossIndex = random.nextInt(randomBossIndexes.length);
+                        int enemyIndex = randomNormalIndexes[randomBossIndex];
+
+                        enemy = Enemy.randomizedBossEnemy(enemyIndex, counter);
+                    } else {
+                        int randomNormalIndex = random.nextInt(randomNormalIndexes.length);
+                        int enemyIndex = randomNormalIndexes[randomNormalIndex];
+
+                        enemy = Enemy.randomizedNormalEnemy(enemyIndex, counter);
+                    }
+
+                    assert enemy != null;
+
+                    if (counter > 1) {
+                        player.levelUp();
+                    }
+
+                    counter++;
+
+                    while (enemy.getHp() != 0) {
+                        System.out.printf("%nLv.%d %s%n", enemy.getLvl(), enemy.getEnemyName());
+                        System.out.printf("HP: %d%n", enemy.getHp());
+                        System.out.println("=".repeat(15));
+                        System.out.printf("Lv.%d %s%n", player.getLvl(), player.getClassName());
+                        System.out.printf("HP: %d%n", player.getHp());
+                        System.out.println("\nWhat will you do?");
+                        player.displaySkills();
+                        System.out.print("Input your move: ");
+                        playerMove = input.nextInt();
+
+                        if (player.getSpd() >= enemy.getSpd()) {
+                            Character.chooseSkill(playerMove, player, enemy);
+                            Enemy.monsterAttack(player, enemy);
+                        }
+
+                        if (player.getSpd() < enemy.getSpd()) {
+                            enemy.basicAttack(player);
+                            Character.chooseSkill(playerMove, player, enemy);
+                        }
+
+                        if (player.getHp() == 0) {
+                            System.out.println("\n" + "=".repeat(13));
+                            System.out.println("= You Lose! =");
+                            System.out.println("=".repeat(13));
+                            YNRound = "n";
+                            break;
+                        }
+                    }
+
+                    if ((counter - 1) % 4 == 0) {
+                        System.out.println("\n" + "=".repeat(18));
+                        System.out.println("= Boss Defeated! =");
+                        System.out.println("=".repeat(18));
+
+                        System.out.print("\nDo you want to continue? (y/n) ");
+                        input.nextLine();
+                        YNRound = input.nextLine();
+
+                        if (!YNRound.equals("y") && !YNRound.equals("n")) {
+                            System.out.println("\n" + "=".repeat(45));
+                            System.out.println("= Invalid Input! We are Finishing the Game! =");
+                            System.out.println("=".repeat(45));
+                            YNRound = "n";
+                        }
+                    }
+                }
+
+                System.out.println("\n" + "=".repeat(26));
+                System.out.println("= Thank You for Playing! =");
+                System.out.println("=".repeat(26));
+                YNGame = "n";
             }
-        } else if (YN.equals("n")) {
+        } else if (YNGame.equals("n")) {
             System.out.println("\n" + "=".repeat(26));
             System.out.println("= Thank You for Playing! =");
             System.out.println("=".repeat(26));

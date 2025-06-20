@@ -2,7 +2,7 @@ package Classaria.characters;
 
 import Classaria.monsters.Enemy;
 
-abstract public class Character {
+public abstract class Character implements LevelUp {
     private String className;
     private int hp;
     private int def;
@@ -17,6 +17,24 @@ abstract public class Character {
             case 4 -> new Trickster();
             default -> null;
         };
+    }
+
+    public static void chooseSkill(int chosenSkill, Character player, Enemy enemy) {
+        switch (chosenSkill) {
+            case 1:
+                player.firstSkill(enemy);
+                break;
+            case 2:
+                player.secondSkill(enemy);
+                break;
+            case 3:
+                player.thirdSkill();
+                player.thirdSkill(enemy);
+                break;
+            default:
+                System.out.println("Invalid Skill Choice!");
+                break;
+        }
     }
 
     public void setHp(int hp) {
@@ -69,9 +87,13 @@ abstract public class Character {
 
     abstract void firstSkill(Enemy target);
 
+    public abstract void levelUp();
+
     public void secondSkill(Enemy target) {}
 
     public void thirdSkill(Enemy target) {}
+
+    public void thirdSkill() {}
 
     public int getFirstSkillDMG() {
         return 0;

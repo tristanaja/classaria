@@ -1,14 +1,42 @@
 package Classaria.monsters;
 
-public class Enemy {
+import Classaria.characters.Character;
+
+public abstract class Enemy implements NextRound, BasicAttack {
+    private String enemyName;
     private int hp;
     private int atk;
     private int spd;
+    private int lvl;
 
     public Enemy() {
+        setLvl(0);
         setHp(0);
         setAtk(0);
         setSpd(0);
+    }
+
+    public static Enemy randomizedNormalEnemy(int randomNormalIndex, int level) {
+        return switch (randomNormalIndex) {
+            case 1 -> new Speedster(level);
+            case 2 -> new RazorEgg(level);
+            default -> null;
+        };
+    }
+
+    public static Enemy randomizedBossEnemy(int randomBossIndex, int level) {
+        return switch (randomBossIndex) {
+            case 1 -> new Boos(level);
+            default -> null;
+        };
+    }
+
+    public String getEnemyName() {
+        return enemyName;
+    }
+
+    public void setEnemyName(String enemyName) {
+        this.enemyName = enemyName;
     }
 
     public void setHp(int hp) {
@@ -23,6 +51,10 @@ public class Enemy {
         this.spd = spd;
     }
 
+    public void setLvl(int lvl) {
+        this.lvl = lvl;
+    }
+
     public int getHp() {
         return hp;
     }
@@ -35,10 +67,15 @@ public class Enemy {
         return spd;
     }
 
-    public void getDescription() {
-        System.out.println("Enemy");
-        System.out.println("HP: " + getHp());
-        System.out.println("ATK: " + getAtk());
-        System.out.println("SPD: " + getSpd());
+    public int getLvl() {
+        return lvl;
+    }
+
+    public abstract void basicAttack(Character target);
+
+    public abstract void nextRound();
+
+    public static void monsterAttack(Character target, Enemy enemy) {
+     enemy.basicAttack(target);
     }
 }

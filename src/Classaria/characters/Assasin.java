@@ -22,16 +22,15 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
     }
 
     @Override
-    public void firstSkill(Enemy target) {
+    void firstSkill(Enemy target) {
+        this.basicAttack(target);
+    }
+
+    @Override
+    public void secondSkill(Enemy target) {
         System.out.println("Player desperately move their hands to slash the enemy repeatedly with the two blades, Starburst Stream!");
 
-        if (target.getHp() > 0) {
-            target.setHp(target.getHp() - skillDMG);
-        }
-
-        if (target.getHp() < skillDMG) {
-            target.setHp(0);
-        }
+        target.setHp(Math.max(0, target.getHp() - skillDMG));
 
         System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
     }
@@ -44,13 +43,7 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
     public void basicAttack(Enemy target) {
         System.out.println("Player sneak behind the enemy and slash, shhh....");
 
-        if (target.getHp() > 0) {
-            target.setHp(target.getHp() - pATK);
-        }
-
-        if (target.getHp() < pATK) {
-            target.setHp(0);
-        }
+        target.setHp(Math.max(0, target.getHp() - pATK));
 
         System.out.println("Player deals " + pATK + " of Damage to the enemy!");
     }
@@ -61,6 +54,7 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
         System.out.printf("2. Starburst Stream => -%d DMG%n", getFirstSkillDMG());
     }
 
+    @Override
     public void levelUp() {
         this.pATK += 5;
         this.skillDMG += 15;

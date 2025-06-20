@@ -6,6 +6,7 @@ public class Mage extends Character implements LevelUp, BasicAttack {
     private int mATK;
     private int skillDMG;
     private int healAMT;
+    private int initialHP;
 
     public Mage() {
         setClassName("Mage");
@@ -16,6 +17,11 @@ public class Mage extends Character implements LevelUp, BasicAttack {
         setDef(5);
         setSpd(10);
         setLvl(1);
+        setInitialHP(getHp());
+    }
+
+    public void setInitialHP(int initialHP) {
+        this.initialHP = initialHP;
     }
 
     @Override
@@ -24,55 +30,67 @@ public class Mage extends Character implements LevelUp, BasicAttack {
     }
 
     @Override
-    public void firstSkill(Enemy target) {
+    void firstSkill(Enemy target) {
+        this.basicAttack(target);
+    }
+
+    @Override
+    public void secondSkill(Enemy target) {
         System.out.println("Player chants and casted Disintegration!");
 
-        if (target.getHp() > 0) {
-            target.setHp(target.getHp() - skillDMG);
-        }
-
-        if (target.getHp() < skillDMG) {
-            target.setHp(0);
-        }
+        target.setHp(Math.max(0, target.getHp() - skillDMG));
 
         System.out.println("Player deals " + skillDMG + " of Damage to the enemy!");
     }
 
+    @Override
+    public void thirdSkill() {
+        this.heal();
+    }
+
     public void heal() {
-        setHp(getHp() + this.healAMT);
+        if (getHp() < initialHP) {
+            int beforeHeal = getHp();
+            int healedHP = Math.min(initialHP, beforeHeal + healAMT);
+            setHp(healedHP);
+
+            System.out.println("Player heals for " + (healedHP - beforeHeal) + " HP!");
+        } else {
+            System.out.println("HP is full! Heal skipped.");
+        }
     }
 
     @Override
     public int getFirstSkillDMG() {
-        return skillDMG;
+        return mATK;
     }
 
     @Override
     public int getSecondSkillDMG() {
+        return skillDMG;
+    }
+
+    @Override
+    public int getThirdSkillDMG() {
         return healAMT;
     }
 
     public void basicAttack(Enemy target) {
         System.out.println("Player casted a Fire Ball to the enemy!");
 
-        if (target.getHp() > 0) {
-            target.setHp(target.getHp() - mATK);
-        }
-
-        if (target.getHp() < mATK) {
-            target.setHp(0);
-        }
+        target.setHp(Math.max(0, target.getHp() - mATK));
 
         System.out.println("Player deals " + mATK + " of Damage to the enemy!");
     }
 
     @Override
     public void displaySkills() {
-        System.out.printf("1. Fire Ball => -%d DMG%n", mATK);
-        System.out.printf("2. Disintegration => -%d DMG%n", getFirstSkillDMG());
-        System.out.printf("3. Heal => +%d Heal%n", getSecondSkillDMG());
+        System.out.printf("1. Fire Ball => -%d DMG%n", getFirstSkillDMG());
+        System.out.printf("2. Disintegration => -%d DMG%n", getSecondSkillDMG());
+        System.out.printf("3. Heal => +%d Heal%n", getThirdSkillDMG());
     }
 
+    @Override
     public void levelUp() {
         this.mATK += 5;
         this.skillDMG += 10;

@@ -2,10 +2,10 @@ package Classaria.characters;
 
 import Classaria.monsters.Enemy;
 
-public class Trickster extends Character implements LevelUp {
-    private int secondHP;
-    private int secondAtk;
-    private int secondSpd;
+public class Trickster extends Character {
+    private int initialHP;
+    private int initialAtk;
+    private int initialSpd;
     private int firstSkillDMG;
     private int secondSkillDMG;
     private int thirdSkillDMG;
@@ -15,92 +15,57 @@ public class Trickster extends Character implements LevelUp {
         this.firstSkillDMG = 5;
         this.secondSkillDMG = 5;
         this.thirdSkillDMG = 5;
-        this.secondHP = 25;
-        this.secondAtk = 0;
-        this.secondSpd = 10;
         setHp(25);
         setDef(5);
         setSpd(10);
         setLvl(1);
+        setInitials(getHp(), getAtk(), getSpd());
     }
 
-    public int getSecondHP() {
-        return secondHP;
+    public void setInitials(int hp, int atk, int spd) {
+        this.initialHP = hp;
+        this.initialAtk = atk;
+        this.initialSpd = spd;
     }
 
-    public int getSecondAtk() {
-        return secondAtk;
+    public void setInitialAtk(int initialAtk) {
+        this.initialAtk = initialAtk;
     }
 
-    public int getSecondSpd() {
-        return secondSpd;
-    }
-
-    public void flushSecondStats() {
-        this.secondHP = getHp();
-        this.secondAtk = 0;
-        this.secondSpd = getSpd();
+    public void flushInitialStats() {
+        setHp(initialHP);
+        setInitialAtk(0);
+        setSpd(initialSpd);
     }
 
     @Override
     public void firstSkill(Enemy target) {
-        if (target.getHp() > 0) {
-            target.setHp(target.getHp() - firstSkillDMG);
-            this.secondHP += firstSkillDMG;
+        int stolenHP = Math.min(firstSkillDMG, target.getHp());
+        target.setHp(Math.max(0, target.getHp() - stolenHP));
+        setHp(getHp() + stolenHP);
 
-            System.out.println("Got yo HP dawg!");
-            System.out.println("Player steals " + firstSkillDMG + " HP from the enemy!");
-        }
-
-        if (target.getHp() < firstSkillDMG) {
-            int tmpHP = target.getHp();
-            target.setHp(0);
-            this.secondHP += tmpHP;
-
-            System.out.println("Got yo HP dawg!");
-            System.out.println("Player steals " + tmpHP + " HP from the enemy!");
-        }
+        System.out.println("Got yo HP dawg!");
+        System.out.println("Player steals " + stolenHP + " HP from the enemy!");
     }
 
     @Override
     public void secondSkill(Enemy target) {
-        if (target.getAtk() > 0) {
-            target.setAtk(target.getAtk() - secondSkillDMG);
-            this.secondAtk += secondSkillDMG;
+        int stolenAtk = Math.min(secondSkillDMG, target.getAtk());
+        target.setAtk(Math.max(0, target.getAtk() - stolenAtk));
+        this.initialAtk += stolenAtk;
 
-            System.out.println("Got yo Attack dawg!");
-            System.out.println("Player steals " + secondSkillDMG + " Attack from the enemy!");
-        }
-
-        if (target.getAtk() < secondSkillDMG) {
-            int tmpATK = target.getAtk();
-            target.setAtk(0);
-            this.secondAtk += tmpATK;
-
-            System.out.println("Got yo Attack dawg!");
-            System.out.println("Player steals " + tmpATK + " Attack from the enemy!");
-        }
+        System.out.println("Got yo Attack dawg!");
+        System.out.println("Player steals " + stolenAtk + " Attack from the enemy!");
     }
 
     @Override
     public void thirdSkill(Enemy target) {
-        if (target.getSpd() > 0) {
-            target.setSpd(target.getSpd() - thirdSkillDMG);
-            this.secondSpd += thirdSkillDMG;
+        int stolenSpd = Math.min(thirdSkillDMG, target.getSpd());
+        target.setSpd(Math.max(0, target.getSpd() - stolenSpd));
+        setSpd(getSpd() + stolenSpd);
 
-            System.out.println("Got yo Speed dawg!");
-            System.out.println("Player steals " + thirdSkillDMG + " Speed from the enemy!");
-
-        }
-
-        if (target.getSpd() < thirdSkillDMG) {
-            int tmpSPD = target.getSpd();
-            target.setSpd(0);
-            this.secondSpd += tmpSPD;
-
-            System.out.println("Got yo Speed dawg!");
-            System.out.println("Player steals " + tmpSPD + " Speed from the enemy!");
-        }
+        System.out.println("Got yo Speed dawg!");
+        System.out.println("Player steals " + stolenSpd + " Speed from the enemy!");
     }
 
     @Override
@@ -125,7 +90,9 @@ public class Trickster extends Character implements LevelUp {
         System.out.printf("3. Got Yo Speed! => Steals %d Speed from Enemy!%n", getThirdSkillDMG());
     }
 
+    @Override
     public void levelUp() {
+        flushInitialStats();
         this.firstSkillDMG += 10;
         this.secondSkillDMG += 10;
         this.thirdSkillDMG += 10;
@@ -133,6 +100,5 @@ public class Trickster extends Character implements LevelUp {
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
         setLvl(getLvl() + 1);
-        flushSecondStats();
     }
 }
