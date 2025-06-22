@@ -1,130 +1,122 @@
 # Classaria - Turn-Based RPG Character System ⚔️
 
-<p align="justify">
-<strong>Classaria</strong> is a fully functional, console-based turn-based RPG built with Java. It serves as a foundational project for demonstrating Object-Oriented Programming (OOP) principles, including inheritance, interfaces, encapsulation, and polymorphism. The system features various playable character classes, unique enemies, and a scalable combat loop.
-</p>
+**Classaria** is a console-based, turn-based RPG built in Java. It demonstrates OOP principles (inheritance, interfaces, encapsulation, polymorphism) and features a variety of playable classes, unique enemies, and a scalable, balanced combat loop.
 
-> ✅ **Project Status:**
-> **Feature-Complete** for its initial scope. The core mechanics and game logic are fully implemented and stable. Designed with extensibility in mind, this project is ideal for learning, experimenting, and expanding.
+> **Status:** Stable & Extensible 🚀
 
 ---
 
 ## ✨ Features
 
-### 🧙‍♂️ Playable Character Classes:
+### 🧑‍🎮 Playable Character Classes
 
-Each class is built upon a shared abstract `Character` base class with distinct abilities and stats:
+Each class is based on the abstract `Character` class, with unique stats and skills:
 
-* **Warrior**: Well-balanced physical fighter with solid attack and defense.
-* **Assasin**: High-speed, high-damage dealer with low defense; excels at quick kills.
-* **Mage**: Focuses on magic-based attacks and healing skills.
-* **Trickster**: A unique class with the ability to steal and temporarily adopt enemy stats:
+- **Warrior**: Balanced fighter with strong attack and defense.
+- **Assassin**: Fast, high-damage, but fragile.
+- **Mage**: Magic attacks and healing.
+- **Trickster**: Steals stats from enemies (HP, ATK, SPD).
+- **Paladin**: Defensive holy knight with healing and protection.
 
-  * `gotYoHP()` ❤️
-  * `gotYoAttack()` 🗡️
-  * `gotYoSpeed()` 💨
+### 👾 Enemies & Bosses
 
-### 👾 Enemies:
+- **Speedster**: Strikes first with high speed.
+- **Razor Egg**: Aggressive, spinning attacker.
+- **Shadow Phantom**: Can become invisible and deal bonus damage.
+- **Boos** (Boss): High stats, scales up each round.
+- **Chaos Dragon** (Boss): Multi-attack, enrages, and regenerates.
 
-* **Speedster**: Prioritizes speed to strike early.
-* **Razor Egg**: Physically aggressive enemy with spinning attacks.
-* **Boos**: A boss enemy with high base stats and progressive difficulty scaling.
+### 🛠️ Core Mechanics
 
-### 🛠️ Core Game Mechanics:
-
-* `displaySkills()`: Outputs character-specific abilities.
-* `levelUp()`: Increases character stats and skill damage.
-* `nextRound()`: Enhances enemy stats as rounds progress.
-* `basicAttack()`: Executes standard physical attacks.
-* Modular interfaces:
-
-  * `LevelUp`
-  * `BasicAttack`
-  * `NextRound`
+- `displaySkills()`: Shows class abilities.
+- `levelUp()`: Increases stats and skill power.
+- `nextRound()`: Enemies grow stronger each round.
+- `basicAttack()`: Standard attack.
+- Modular interfaces: `LevelUp`, `BasicAttack`, `NextRound`.
 
 ---
 
-## 🗂️ Project Directory Structure
+## ⚖️ Balancing & Scaling
+
+- **Players**: +10 HP, +5 DEF, +5 ATK, +5 SPD per level. Skills and healing scale by +10% per level.
+- **Trickster**: Steals 10% of enemy stat (min 5).
+- **Monsters**: +8~10 HP, +5~6 ATK, +3~4 SPD per level.
+- **Bosses**: +12~15 HP, +7~8 ATK, +4~5 SPD per level.
+- **Gameplay**: Designed for fair, challenging progression.
+
+---
+
+## 🗂️ Project Structure
 
 ```
 Classaria/
 ├── characters/
-│   ├── Character.java          # Abstract base class
-│   ├── Warrior.java            # Warrior class
-│   ├── Assasin.java            # Assassin class
-│   ├── Mage.java               # Mage class
-│   ├── Trickster.java          # Trickster class
-│   ├── BasicAttack.java        # Interface (character -> enemy)
-│   └── LevelUp.java            # Leveling interface
+│   ├── Character.java
+│   ├── Warrior.java
+│   ├── Assasin.java
+│   ├── Mage.java
+│   ├── Trickster.java
+│   ├── Paladin.java
+│   ├── BasicAttack.java
+│   └── LevelUp.java
 ├── monsters/
-│   ├── Enemy.java              # Base class for enemies
-│   ├── Speedster.java          # Speed-focused enemy
-│   ├── RazorEgg.java           # Physical attacker
-│   ├── Boos.java               # Boss enemy
-│   ├── BasicAttack.java        # Interface (enemy -> character)
-│   └── NextRound.java         # Enemy scaling interface
+│   ├── Enemy.java
+│   ├── Speedster.java
+│   ├── RazorEgg.java
+│   ├── ShadowPhantom.java
+│   ├── Boos.java
+│   ├── ChaosDragon.java
+│   ├── BasicAttack.java
+│   └── NextRound.java
 ├── mains/
-│   └── Classaria.java          # Main game logic
+│   └── Classaria.java
 ```
 
 ---
 
-## 🧪 Gameplay Overview
+## 🎮 Gameplay Overview
 
-1. Player selects a character class.
-2. Encounters with random enemies occur each round.
-3. Turn order is determined by speed.
-4. After winning, the player levels up while enemies grow stronger.
-5. The loop continues until defeat or user termination.
+1. Choose your class and view its skills.
+2. Battle random enemies and bosses each round.
+3. Turn order is based on speed.
+4. Level up after each victory; enemies also grow stronger.
+5. Survive as long as you can!
 
 ---
 
 ## ▶️ Running the Project
 
-1. **Compile** the project:
-
-```bash
-javac Classaria/mains/Classaria.java
-```
-
-2. **Run** the game:
-
-```bash
-java Classaria.mains.Classaria
-```
+1. **Compile:**
+   ```bash
+   javac Classaria/mains/Classaria.java
+   ```
+2. **Run:**
+   ```bash
+   java Classaria.mains.Classaria
+   ```
 
 ---
 
 ## 📌 Notes
 
-* Console-based game, suitable for academic or personal learning.
-* Emphasizes code clarity and modularity.
-* Trickster class is ideal for exploring more advanced OOP patterns.
-* Easily extensible for new features like item systems, skill trees, or multiplayer turn simulation.
+- Console-based, ideal for learning or extending.
+- Clean, modular code for easy expansion.
+- Try adding new classes, monsters, or mechanics!
 
 ---
 
-## 🌱 Contributing & Extending
+## 🌱 Contributing
 
-You are welcome to fork and evolve the project with:
-
-* New character classes or monsters
-* Refined combat systems
-* Inventory and item usage
-* Enhanced game loops or UI elements
-
-**Contribution Guidelines:**
-
-* Open issues for bugs or suggestions.
-* Submit pull requests (PRs) for any contributions.
-* PRs must be reviewed and approved before merging to the `master` branch.
+- Fork and extend: new classes, monsters, or features welcome.
+- Open issues for bugs or suggestions.
+- Pull requests are reviewed before merging.
 
 ---
 
-## 👨‍💻 Author/CODEOWNERS
+## 👨‍💻 Author
 
-Crafted with care by **Tristan** – a student of OOP and game design, using Java to turn concepts into code. 💡
+Crafted by **Tristan** – OOP/game design enthusiast. 💡
 
 ---
 
-*Ready to test your logic and Java skills? Fork, play, and build your own fantasy experience!*
+_Ready to test your logic and Java skills? Fork, play, and build your own fantasy!_
