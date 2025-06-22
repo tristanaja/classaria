@@ -17,9 +17,9 @@ public class Boos extends Enemy implements NextRound, BasicAttack {
     public Boos(int level) {
         setLvl(level);
         setEnemyName("Boos");
-        setHp(150 + 10 * (level - 1));
-        setAtk(25 + 10 * (level - 1));
-        setSpd(15 + 10 * (level - 1));
+        setHp(150 + 12 * (level - 1));
+        setAtk(25 + 7 * (level - 1));
+        setSpd(15 + 4 * (level - 1));
 
         System.out.println("Space Tremble, Time Diluted, Reality Shifts...");
         System.out.println("Boos descends and crack the ground!!");
@@ -28,9 +28,9 @@ public class Boos extends Enemy implements NextRound, BasicAttack {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 10);
-        setAtk(getAtk() + 10);
-        setSpd(getSpd() + 10);
+        setHp(getHp() + 12);
+        setAtk(getAtk() + 7);
+        setSpd(getSpd() + 4);
     }
 
     @Override

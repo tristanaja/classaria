@@ -15,44 +15,45 @@ public abstract class Character implements LevelUp {
             case 2 -> new Assasin();
             case 3 -> new Mage();
             case 4 -> new Trickster();
+            case 5 -> new Paladin();
             default -> null;
         };
     }
 
     public static void chooseSkill(int chosenSkill, Character player, Enemy enemy) {
+        if (chosenSkill < 1 || chosenSkill > 3) {
+            System.out.println("Invalid Skill Choice! (1-3)");
+            return;
+        }
+
         switch (chosenSkill) {
-            case 1:
-                player.firstSkill(enemy);
-                break;
-            case 2:
-                player.secondSkill(enemy);
-                break;
-            case 3:
+            case 1 -> player.firstSkill(enemy);
+            case 2 -> player.secondSkill(enemy);
+            case 3 -> {
                 player.thirdSkill();
                 player.thirdSkill(enemy);
-                break;
-            default:
-                System.out.println("Invalid Skill Choice!");
-                break;
+            }
         }
     }
 
+    // Setters with validation
     public void setHp(int hp) {
-        this.hp = hp;
+        this.hp = Math.max(0, hp); // Prevent negative HP
     }
 
     public void setDef(int def) {
-        this.def = def;
+        this.def = Math.max(0, def); // Prevent negative defense
     }
 
     public void setSpd(int spd) {
-        this.spd = spd;
+        this.spd = Math.max(0, spd); // Prevent negative speed
     }
 
     public void setLvl(int lvl) {
-        this.lvl = lvl;
+        this.lvl = Math.max(1, lvl); // Level should start from 1
     }
 
+    // Getters
     public int getHp() {
         return hp;
     }

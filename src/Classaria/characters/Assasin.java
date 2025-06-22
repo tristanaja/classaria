@@ -68,8 +68,8 @@ public class Assasin extends Character implements LevelUp, BasicAttack {
     public void levelUp() {
         flushInitialStats();
         this.pATK += 5;
-        this.skillDMG += 15;
-        setHp(getHp() + 5);
+        this.skillDMG = (int)Math.ceil(this.skillDMG * 1.1); // +10% per level
+        setHp(getHp() + 10);
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
         setLvl(getLvl() + 1);

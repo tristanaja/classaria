@@ -16,9 +16,9 @@ public class RazorEgg extends Enemy {
     public RazorEgg(int level) {
         setLvl(level);
         setEnemyName("Razor Egg");
-        setHp(65 + 10 * (level - 1));
-        setAtk(15 + 10 * (level - 1));
-        setSpd(10 + 5 * (level - 1));
+        setHp(65 + 8 * (level - 1));
+        setAtk(15 + 5 * (level - 1));
+        setSpd(10 + 3 * (level - 1));
 
         System.out.println("Wild Razor Egg shows up!");
     }
@@ -26,9 +26,9 @@ public class RazorEgg extends Enemy {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 10);
-        setAtk(getAtk() + 10);
-        setSpd(getSpd() + 5);
+        setHp(getHp() + 8);
+        setAtk(getAtk() + 5);
+        setSpd(getSpd() + 3);
     }
 
     @Override

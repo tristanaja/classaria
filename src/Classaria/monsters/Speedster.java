@@ -15,9 +15,9 @@ public class Speedster extends Enemy {
     public Speedster(int level) {
         setLvl(level);
         setEnemyName("Speedster");
-        setHp(50 + 10 * (level - 1));
-        setAtk(10 + 10 * (level - 1));
-        setSpd(20 + 5 * (level - 1));
+        setHp(50 + 8 * (level - 1));
+        setAtk(10 + 5 * (level - 1));
+        setSpd(20 + 3 * (level - 1));
 
         System.out.println("Wild Speedster shows up!");
     }
@@ -25,9 +25,9 @@ public class Speedster extends Enemy {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 10);
-        setAtk(getAtk() + 10);
-        setSpd(getSpd() + 5);
+        setHp(getHp() + 8);
+        setAtk(getAtk() + 5);
+        setSpd(getSpd() + 3);
     }
 
     @Override

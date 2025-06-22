@@ -40,7 +40,8 @@ public class Trickster extends Character {
 
     @Override
     public void firstSkill(Enemy target) {
-        int stolenHP = Math.min(firstSkillDMG, target.getHp());
+        int stealAmount = Math.max(5, (int)(target.getHp() * 0.1));
+        int stolenHP = Math.min(stealAmount, target.getHp());
         target.setHp(Math.max(0, target.getHp() - stolenHP));
         setHp(getHp() + stolenHP);
 
@@ -50,7 +51,8 @@ public class Trickster extends Character {
 
     @Override
     public void secondSkill(Enemy target) {
-        int stolenAtk = Math.min(secondSkillDMG, target.getAtk());
+        int stealAmount = Math.max(5, (int)(target.getAtk() * 0.1));
+        int stolenAtk = Math.min(stealAmount, target.getAtk());
         target.setAtk(Math.max(0, target.getAtk() - stolenAtk));
         this.initialAtk += stolenAtk;
 
@@ -60,7 +62,8 @@ public class Trickster extends Character {
 
     @Override
     public void thirdSkill(Enemy target) {
-        int stolenSpd = Math.min(thirdSkillDMG, target.getSpd());
+        int stealAmount = Math.max(5, (int)(target.getSpd() * 0.1));
+        int stolenSpd = Math.min(stealAmount, target.getSpd());
         target.setSpd(Math.max(0, target.getSpd() - stolenSpd));
         setSpd(getSpd() + stolenSpd);
 
@@ -93,10 +96,10 @@ public class Trickster extends Character {
     @Override
     public void levelUp() {
         flushInitialStats();
-        this.firstSkillDMG += 10;
-        this.secondSkillDMG += 10;
-        this.thirdSkillDMG += 10;
-        setHp(getHp() + 5);
+        this.firstSkillDMG = (int)Math.ceil(this.firstSkillDMG * 1.1);
+        this.secondSkillDMG = (int)Math.ceil(this.secondSkillDMG * 1.1);
+        this.thirdSkillDMG = (int)Math.ceil(this.thirdSkillDMG * 1.1);
+        setHp(getHp() + 10);
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
         setLvl(getLvl() + 1);
