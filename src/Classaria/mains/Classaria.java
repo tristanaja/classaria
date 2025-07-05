@@ -2,11 +2,11 @@ package Classaria.mains;
 
 import Classaria.characters.Character;
 import Classaria.monsters.Enemy;
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class Classaria {
+
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
         int counter = 1;
@@ -18,8 +18,8 @@ public class Classaria {
         int playerMove;
         Enemy enemy;
         Random random = new Random();
-        int[] randomNormalIndexes = {1, 2, 3}; // Added ShadowPhantom
-        int[] randomBossIndexes = {1, 2}; // Added ChaosDragon
+        int[] randomNormalIndexes = { 1, 2, 3 }; // Added ShadowPhantom
+        int[] randomBossIndexes = { 1, 2 }; // Added ChaosDragon
         int highScore = 0;
 
         System.out.println("-+-+-+-+-+-+-");
@@ -32,11 +32,21 @@ public class Classaria {
         if (YNGame.equals("y")) {
             while (YNGame.equals("y")) {
                 System.out.println("\nChoose your Class!");
-                System.out.println("1. Warrior - Balanced fighter with strong defense");
-                System.out.println("2. Assassin - Swift striker with high damage");
-                System.out.println("3. Mage - Powerful spellcaster with healing");
-                System.out.println("4. Trickster - Unique stat-stealing abilities");
-                System.out.println("5. Paladin - Holy warrior with defense and healing");
+                System.out.println(
+                    "1. Warrior - Balanced fighter with strong defense"
+                );
+                System.out.println(
+                    "2. Assassin - Swift striker with high damage"
+                );
+                System.out.println(
+                    "3. Mage - Powerful spellcaster with healing"
+                );
+                System.out.println(
+                    "4. Trickster - Unique stat-stealing abilities"
+                );
+                System.out.println(
+                    "5. Paladin - Holy warrior with defense and healing"
+                );
                 System.out.print("Input 1-5 to see Class Overview! ");
 
                 try {
@@ -52,7 +62,10 @@ public class Classaria {
                     player = Character.chooseClass(chosenClass);
 
                     assert player != null;
-                    System.out.printf("%nYou Choose %s!%n", player.getClassName());
+                    System.out.printf(
+                        "%nYou Choose %s!%n",
+                        player.getClassName()
+                    );
                     System.out.println("=".repeat(30));
                     System.out.println("Starting Stats:");
                     System.out.printf("=> Health  = %d%n", player.getHp());
@@ -62,7 +75,9 @@ public class Classaria {
                     System.out.println("\nSkills:");
                     player.displaySkills();
                     System.out.println("=".repeat(30));
-                    System.out.println("Skill Damage and Player Stats will increase each round!");
+                    System.out.println(
+                        "Skill Damage and Player Stats will increase each round!"
+                    );
 
                     System.out.print("\nDo you want this class? (y/n) ");
                     input.nextLine();
@@ -70,7 +85,9 @@ public class Classaria {
 
                     if (YNClass.equals("n")) {
                         System.out.println("\n" + "=".repeat(38));
-                        System.out.println("= Okay! Select Different Class Next! =");
+                        System.out.println(
+                            "= Okay! Select Different Class Next! ="
+                        );
                         System.out.println("=".repeat(38));
                         continue;
                     } else if (!YNClass.equals("y")) {
@@ -84,7 +101,10 @@ public class Classaria {
                     System.out.println("+ Classaria +");
                     System.out.println("-+-+-+-+-+-+-\n");
 
-                    System.out.printf("Welcome! Your Journey Starts now %s!%n", player.getClassName());
+                    System.out.printf(
+                        "Welcome! Your Journey Starts now %s!%n",
+                        player.getClassName()
+                    );
 
                     while (YNRound.equals("y")) {
                         System.out.println("=".repeat(30));
@@ -97,11 +117,19 @@ public class Classaria {
                         System.out.println("\n...\n");
 
                         if (counter % 4 == 0) {
-                            int randomBossIndex = random.nextInt(randomBossIndexes.length) + 1;
-                            enemy = Enemy.randomizedBossEnemy(randomBossIndex, counter);
+                            int randomBossIndex =
+                                random.nextInt(randomBossIndexes.length) + 1;
+                            enemy = Enemy.randomizedBossEnemy(
+                                randomBossIndex,
+                                counter
+                            );
                         } else {
-                            int randomNormalIndex = random.nextInt(randomNormalIndexes.length) + 1;
-                            enemy = Enemy.randomizedNormalEnemy(randomNormalIndex, counter);
+                            int randomNormalIndex =
+                                random.nextInt(randomNormalIndexes.length) + 1;
+                            enemy = Enemy.randomizedNormalEnemy(
+                                randomNormalIndex,
+                                counter
+                            );
                         }
 
                         assert enemy != null;
@@ -113,10 +141,18 @@ public class Classaria {
                         while (enemy.getHp() > 0 && player.getHp() > 0) {
                             // Display battle status
                             System.out.println("\n" + "=".repeat(50));
-                            System.out.printf("Lv.%d %s%n", enemy.getLvl(), enemy.getEnemyName());
+                            System.out.printf(
+                                "Lv.%d %s%n",
+                                enemy.getLvl(),
+                                enemy.getEnemyName()
+                            );
                             System.out.printf("HP: %d%n", enemy.getHp());
                             System.out.println("-".repeat(20));
-                            System.out.printf("Lv.%d %s%n", player.getLvl(), player.getClassName());
+                            System.out.printf(
+                                "Lv.%d %s%n",
+                                player.getLvl(),
+                                player.getClassName()
+                            );
                             System.out.printf("HP: %d%n", player.getHp());
                             System.out.println("=".repeat(50));
 
@@ -132,7 +168,11 @@ public class Classaria {
                                 // Determine turn order based on speed
                                 if (player.getSpd() >= enemy.getSpd()) {
                                     // Player goes first
-                                    Character.chooseSkill(playerMove, player, enemy);
+                                    Character.chooseSkill(
+                                        playerMove,
+                                        player,
+                                        enemy
+                                    );
                                     if (enemy.getHp() > 0) {
                                         System.out.println("=".repeat(50));
                                         Enemy.monsterAttack(player, enemy);
@@ -142,21 +182,32 @@ public class Classaria {
                                     Enemy.monsterAttack(player, enemy);
                                     if (player.getHp() > 0) {
                                         System.out.println("=".repeat(50));
-                                        Character.chooseSkill(playerMove, player, enemy);
+                                        Character.chooseSkill(
+                                            playerMove,
+                                            player,
+                                            enemy
+                                        );
                                     }
                                 }
 
                                 System.out.println("=".repeat(50));
                             } catch (Exception e) {
-                                System.out.println("Invalid input! Turn skipped.");
+                                System.out.println(
+                                    "Invalid input! Turn skipped."
+                                );
                                 input.nextLine(); // Clear the invalid input
                             }
                         }
 
                         if (player.getHp() == 0) {
                             System.out.println("\n" + "=".repeat(40));
-                            System.out.println("=   Game Over! You've been defeated!   =");
-                            System.out.printf("=> Final Score: %d rounds\n", counter - 1);
+                            System.out.println(
+                                "=   Game Over! You've been defeated!   ="
+                            );
+                            System.out.printf(
+                                "=> Final Score: %d rounds\n",
+                                counter - 1
+                            );
                             if (counter - 1 > highScore) {
                                 highScore = counter - 1;
                                 System.out.println("=> New High Score!");
@@ -173,13 +224,17 @@ public class Classaria {
                             System.out.println("= Boss Defeated! =");
                             System.out.println("=".repeat(18));
 
-                            System.out.print("\nContinue to next round? (y/n) ");
+                            System.out.print(
+                                "\nContinue to next round? (y/n) "
+                            );
                             input.nextLine();
                             YNRound = input.nextLine().toLowerCase();
 
                             if (!YNRound.equals("y") && !YNRound.equals("n")) {
                                 System.out.println("\n" + "=".repeat(45));
-                                System.out.println("= Invalid Input! Game Over! =");
+                                System.out.println(
+                                    "= Invalid Input! Game Over! ="
+                                );
                                 System.out.println("=".repeat(45));
                                 YNRound = "n";
                             }
@@ -187,8 +242,13 @@ public class Classaria {
                     }
 
                     System.out.println("\n" + "=".repeat(40));
-                    System.out.println("=   Thank You for Playing Classaria!   =");
-                    System.out.printf("=> Your High Score: %d rounds\n", highScore);
+                    System.out.println(
+                        "=   Thank You for Playing Classaria!   ="
+                    );
+                    System.out.printf(
+                        "=> Your High Score: %d rounds\n",
+                        highScore
+                    );
                     System.out.println("=".repeat(40));
 
                     System.out.print("\nPlay Again? (y/n) ");
