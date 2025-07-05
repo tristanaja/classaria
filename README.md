@@ -15,7 +15,7 @@ Each class is based on the abstract `Character` class, with unique stats and ski
 - **Warrior**: Balanced fighter with strong attack and defense.
 - **Assassin**: Fast, high-damage, but fragile.
 - **Mage**: Magic attacks and healing.
-- **Trickster**: Steals stats from enemies (HP, ATK, SPD).
+- **Trickster**: Steals stats from enemies (HP, ATK, SPD). `initialAtk` variable is now properly used to reset attack stat.
 - **Paladin**: Defensive holy knight with healing and protection.
 - **Necromancer**: Dark magic user with life-stealing abilities.
 - **Ranger**: Agile archer with precise shots.
@@ -31,6 +31,7 @@ Each class is based on the abstract `Character` class, with unique stats and ski
 - **Boos** (Boss): High stats, scales up each round.
 - **Chaos Dragon** (Boss): Multi-attack, enrages, and regenerates.
 - **Lich King** (Boss): Summons undead minions and casts powerful spells.
+- **Undead Minion**: Summoned by the Lich King to aid in battle.
 
 ### 🛠️ Core Mechanics
 
@@ -78,6 +79,7 @@ Classaria/
 │   ├── Boos.java
 │   ├── ChaosDragon.java
 │   ├── LichKing.java
+│   ├── UndeadMinion.java
 │   ├── BasicAttack.java
 │   └── NextRound.java
 ├── mains/
