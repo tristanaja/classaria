@@ -3,9 +3,7 @@ package Classaria.mains;
 import Classaria.characters.Character;
 import Classaria.monsters.Enemy;
 import Classaria.monsters.LichKing;
-import Classaria.monsters.UndeadMinion;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -191,7 +189,7 @@ public class Classaria {
                         continue;
                     }
 
-                    int targetEnemyIndex = -1;
+                    int targetEnemyIndex;
                     if (activeEnemies.size() > 1) {
                         System.out.print("Choose target enemy (1-" + activeEnemies.size() + "): ");
                         targetEnemyIndex = input.nextInt() - 1;
@@ -223,11 +221,8 @@ public class Classaria {
                         if (!activeEnemies.isEmpty()) {
                             System.out.println("=".repeat(50));
                             // Enemies attack
-                            Iterator<Enemy> enemyIterator = activeEnemies.iterator();
-                            while (enemyIterator.hasNext()) {
-                                Enemy currentAttackingEnemy = enemyIterator.next();
-                                if (currentAttackingEnemy instanceof LichKing) {
-                                    LichKing lichKing = (LichKing) currentAttackingEnemy;
+                            for (Enemy currentAttackingEnemy : activeEnemies) {
+                                if (currentAttackingEnemy instanceof LichKing lichKing) {
                                     lichKing.basicAttack(player);
                                     if (lichKing.getHasSummoned()) {
                                         activeEnemies.add(lichKing.summonUndead());
@@ -241,11 +236,8 @@ public class Classaria {
                         }
                     } else {
                         // Enemy goes first
-                        Iterator<Enemy> enemyIterator = activeEnemies.iterator();
-                        while (enemyIterator.hasNext()) {
-                            Enemy currentAttackingEnemy = enemyIterator.next();
-                            if (currentAttackingEnemy instanceof LichKing) {
-                                LichKing lichKing = (LichKing) currentAttackingEnemy;
+                        for (Enemy currentAttackingEnemy : activeEnemies) {
+                            if (currentAttackingEnemy instanceof LichKing lichKing) {
                                 lichKing.basicAttack(player);
                                 if (lichKing.getHasSummoned()) {
                                     activeEnemies.add(lichKing.summonUndead());
