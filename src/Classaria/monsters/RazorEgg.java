@@ -26,9 +26,9 @@ public class RazorEgg extends Enemy {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 8);
-        setAtk(getAtk() + 5);
-        setSpd(getSpd() + 3);
+        setHp(getHp() + 9);
+        setAtk(getAtk() + 6);
+        setSpd(getSpd() + 4);
     }
 
     @Override

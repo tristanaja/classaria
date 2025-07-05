@@ -29,5 +29,5 @@ bin/
 .DS_Store
 
 #GEMINI CLI
-.gemini/GEMINI.md
-.gemini/GEMINI.PLAN.md
+GEMINI.md
+GEMINI.PLAN.md

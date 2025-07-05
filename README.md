@@ -17,14 +17,20 @@ Each class is based on the abstract `Character` class, with unique stats and ski
 - **Mage**: Magic attacks and healing.
 - **Trickster**: Steals stats from enemies (HP, ATK, SPD).
 - **Paladin**: Defensive holy knight with healing and protection.
+- **Necromancer**: Dark magic user with life-stealing abilities.
+- **Ranger**: Agile archer with precise shots.
+- **Berserker**: Furious warrior with increasing attack as HP decreases.
 
 ### 👾 Enemies & Bosses
 
 - **Speedster**: Strikes first with high speed.
 - **Razor Egg**: Aggressive, spinning attacker.
 - **Shadow Phantom**: Can become invisible and deal bonus damage.
+- **Goblin**: Basic melee attacker.
+- **Slime**: High HP, low attack.
 - **Boos** (Boss): High stats, scales up each round.
 - **Chaos Dragon** (Boss): Multi-attack, enrages, and regenerates.
+- **Lich King** (Boss): Summons undead minions and casts powerful spells.
 
 ### 🛠️ Core Mechanics
 
@@ -38,10 +44,10 @@ Each class is based on the abstract `Character` class, with unique stats and ski
 
 ## ⚖️ Balancing & Scaling
 
-- **Players**: +10 HP, +5 DEF, +5 ATK, +5 SPD per level. Skills and healing scale by +10% per level.
-- **Trickster**: Steals 10% of enemy stat (min 5).
-- **Monsters**: +8~10 HP, +5~6 ATK, +3~4 SPD per level.
-- **Bosses**: +12~15 HP, +7~8 ATK, +4~5 SPD per level.
+- **Players**: HP, DEF, ATK, and SPD increases vary by class. Skills and healing scale by +15% per level.
+- **Trickster**: Steals 15% of enemy stat (min 5).
+- **Normal Monsters**: HP, ATK, and SPD increases vary by monster type (e.g., Goblin: +8 HP, +5 ATK, +3 SPD; Slime: +12 HP, +4 ATK, +2 SPD).
+- **Bosses**: HP, ATK, and SPD increases vary by boss type (e.g., Chaos Dragon: +18 HP, +10 ATK, +7 SPD; Lich King: +25 HP, +9 ATK, +6 SPD).
 - **Gameplay**: Designed for fair, challenging progression.
 
 ---
@@ -57,6 +63,9 @@ Classaria/
 │   ├── Mage.java
 │   ├── Trickster.java
 │   ├── Paladin.java
+│   ├── Necromancer.java
+│   ├── Ranger.java
+│   ├── Berserker.java
 │   ├── BasicAttack.java
 │   └── LevelUp.java
 ├── monsters/
@@ -64,8 +73,11 @@ Classaria/
 │   ├── Speedster.java
 │   ├── RazorEgg.java
 │   ├── ShadowPhantom.java
+│   ├── Goblin.java
+│   ├── Slime.java
 │   ├── Boos.java
 │   ├── ChaosDragon.java
+│   ├── LichKing.java
 │   ├── BasicAttack.java
 │   └── NextRound.java
 ├── mains/

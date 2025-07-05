@@ -21,6 +21,8 @@ public abstract class Enemy implements NextRound, BasicAttack {
             case 1 -> new Speedster(level);
             case 2 -> new RazorEgg(level);
             case 3 -> new ShadowPhantom(level);
+            case 4 -> new Goblin(level);
+            case 5 -> new Slime(level);
             default -> null;
         };
     }
@@ -29,6 +31,7 @@ public abstract class Enemy implements NextRound, BasicAttack {
         return switch (randomBossIndex) {
             case 1 -> new Boos(level);
             case 2 -> new ChaosDragon(level);
+            case 3 -> new LichKing(level);
             default -> null;
         };
     }

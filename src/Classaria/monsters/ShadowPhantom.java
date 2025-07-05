@@ -30,9 +30,9 @@ public class ShadowPhantom extends Enemy {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 10);
-        setAtk(getAtk() + 6);
-        setSpd(getSpd() + 4);
+        setHp(getHp() + 12);
+        setAtk(getAtk() + 7);
+        setSpd(getSpd() + 5);
     }
     
     @Override

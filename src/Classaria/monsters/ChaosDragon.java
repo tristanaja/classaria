@@ -34,9 +34,9 @@ public class ChaosDragon extends Enemy {
     @Override
     public void nextRound() {
         setLvl(getLvl() + 1);
-        setHp(getHp() + 15);
-        setAtk(getAtk() + 8);
-        setSpd(getSpd() + 5);
+        setHp(getHp() + 18);
+        setAtk(getAtk() + 10);
+        setSpd(getSpd() + 7);
     }
     
     @Override

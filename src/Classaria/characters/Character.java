@@ -8,6 +8,7 @@ public abstract class Character implements LevelUp {
     private int def;
     private int spd;
     private int lvl;
+    private int atk;
 
     public static Character chooseClass(int chosenClass) {
         return switch (chosenClass) {
@@ -16,6 +17,9 @@ public abstract class Character implements LevelUp {
             case 3 -> new Mage();
             case 4 -> new Trickster();
             case 5 -> new Paladin();
+            case 6 -> new Necromancer();
+            case 7 -> new Ranger();
+            case 8 -> new Berserker();
             default -> null;
         };
     }
@@ -71,7 +75,11 @@ public abstract class Character implements LevelUp {
     }
 
     public int getAtk() {
-        return 0;
+        return atk;
+    }
+
+    public void setAtk(int atk) {
+        this.atk = Math.max(0, atk);
     }
 
     public void displaySkills() {

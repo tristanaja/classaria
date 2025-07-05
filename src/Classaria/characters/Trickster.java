@@ -4,7 +4,6 @@ import Classaria.monsters.Enemy;
 
 public class Trickster extends Character {
     private int initialHP;
-    private int initialAtk;
     private int initialSpd;
     private int firstSkillDMG;
     private int secondSkillDMG;
@@ -18,23 +17,22 @@ public class Trickster extends Character {
         setHp(25);
         setDef(5);
         setSpd(10);
+        setAtk(10); // Initial attack for Trickster
         setLvl(1);
         setInitials(getHp(), getAtk(), getSpd());
     }
 
     public void setInitials(int hp, int atk, int spd) {
         this.initialHP = hp;
-        this.initialAtk = atk;
+        setAtk(atk);
         this.initialSpd = spd;
     }
 
-    public void setInitialAtk(int initialAtk) {
-        this.initialAtk = initialAtk;
-    }
+    
 
     public void flushInitialStats() {
         setHp(initialHP);
-        setInitialAtk(0);
+        setAtk(getAtk()); // Use current attack as initial attack
         setSpd(initialSpd);
     }
 
@@ -54,7 +52,7 @@ public class Trickster extends Character {
         int stealAmount = Math.max(5, (int)(target.getAtk() * 0.1));
         int stolenAtk = Math.min(stealAmount, target.getAtk());
         target.setAtk(Math.max(0, target.getAtk() - stolenAtk));
-        this.initialAtk += stolenAtk;
+        setAtk(getAtk() + stolenAtk);
 
         System.out.println("Got yo Attack dawg!");
         System.out.println("Player steals " + stolenAtk + " Attack from the enemy!");
@@ -96,9 +94,9 @@ public class Trickster extends Character {
     @Override
     public void levelUp() {
         flushInitialStats();
-        this.firstSkillDMG = (int)Math.ceil(this.firstSkillDMG * 1.1);
-        this.secondSkillDMG = (int)Math.ceil(this.secondSkillDMG * 1.1);
-        this.thirdSkillDMG = (int)Math.ceil(this.thirdSkillDMG * 1.1);
+        this.firstSkillDMG = (int)Math.ceil(this.firstSkillDMG * 1.15);
+        this.secondSkillDMG = (int)Math.ceil(this.secondSkillDMG * 1.15);
+        this.thirdSkillDMG = (int)Math.ceil(this.thirdSkillDMG * 1.15);
         setHp(getHp() + 10);
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);

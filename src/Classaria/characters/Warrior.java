@@ -67,8 +67,8 @@ public class Warrior extends Character implements BasicAttack {
     @Override
     public void levelUp() {
         flushInitialStats();
-        this.pATK += 5;
-        this.skillDMG = (int)Math.ceil(this.skillDMG * 1.1); // +10% per level
+        this.pATK += 6;
+        this.skillDMG = (int)Math.ceil(this.skillDMG * 1.15); // +15% per level
         setHp(getHp() + 10);
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);

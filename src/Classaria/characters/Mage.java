@@ -99,7 +99,7 @@ public class Mage extends Character implements LevelUp, BasicAttack {
         flushInitialStats();
         this.mATK += 5;
         this.skillDMG = (int)Math.ceil(this.skillDMG * 1.1); // +10% per level
-        this.healAMT = (int)Math.ceil(this.healAMT * 1.1); // +10% per level
+        this.healAMT = (int)Math.ceil(this.healAMT * 1.15); // +15% per level
         setHp(getHp() + 10);
         setDef(getDef() + 5);
         setSpd(getSpd() + 5);
